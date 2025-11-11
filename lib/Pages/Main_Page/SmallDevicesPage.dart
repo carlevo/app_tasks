@@ -7,16 +7,17 @@ class Smalldevicespage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: ColorsApp.accentColor,
       appBar: AppBar(
         backgroundColor: ColorsApp.primaryColor,
         title: Text("Tasks App",style:TextStyle(
-          color:ColorsApp.secondaryColor,
+          color:ColorsApp.accentColor,
         ),
         ),
         actions: [
           IconButton(onPressed: () {
             
-          }, icon: Icon(Icons.book, color: ColorsApp.secondaryColor,)),
+          }, icon: Icon(Icons.book, color: ColorsApp.accentColor,)),
         ],
       ),
 
@@ -26,26 +27,29 @@ class Smalldevicespage extends StatelessWidget {
         FloatingActionButton(onPressed: () {  
 
         },
+        
         backgroundColor: ColorsApp.primaryColor,
         shape:CircleBorder(
           side: BorderSide(
-            color: ColorsApp.secondaryColor,
+            color: ColorsApp.primaryColor,
             width: 2,
           ),
         ),
-        child: Icon(Icons.favorite,),
+        child: Icon(Icons.favorite,color: ColorsApp.accentColor,),
         ),
+        SizedBox(height: 10,),
         FloatingActionButton(onPressed: () {
           
         },
+        
         backgroundColor: ColorsApp.primaryColor,
         shape:CircleBorder(
           side: BorderSide(
-            color: ColorsApp.secondaryColor,
+            color: ColorsApp.primaryColor,
             width: 2,
           ),
         ),
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,color:ColorsApp.accentColor),
         ),
       ],
       
