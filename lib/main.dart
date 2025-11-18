@@ -7,26 +7,30 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MainApp());
 }
-  double screenWidth = 0;
-  String orientation = "";
+
+double screenWidth = 0;
+String orientation = "";
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     //final bool dispositiuWeb = kIsWeb;
-    screenWidth = MediaQuery.of(context).size.width;
-    
+    Size screenWidth = MediaQuery.of(context).size;
+
     //print(MediaQuery.of(context).size.height);
     //print(MediaQuery.of(context).size.width);
     //orientation = MediaQuery.of(context).orientation.name;
     //print(orientation);
-    
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: screenWidth < 600 ? mobileApp() : screenWidth < 1200 ? tabletApp() : desktopApp(),
+      home: screenWidth.width < 600
+          ? mobileApp()
+          : screenWidth.width < 1200
+          ? tabletApp()
+          : desktopApp(),
     );
   }
 }

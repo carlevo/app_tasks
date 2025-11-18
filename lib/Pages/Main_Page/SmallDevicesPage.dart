@@ -1,4 +1,5 @@
 import 'package:app_tasks/colors_app.dart';
+import 'package:app_tasks/components/item_task.dart';
 import 'package:flutter/material.dart';
 
 class Smalldevicespage extends StatelessWidget {
@@ -6,55 +7,67 @@ class Smalldevicespage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: ColorsApp.accentColor,
       appBar: AppBar(
         backgroundColor: ColorsApp.primaryColor,
-        title: Text("Tasks App",style:TextStyle(
-          color:ColorsApp.accentColor,
-        ),
+        title: Text(
+          "Tasks App",
+          style: TextStyle(color: ColorsApp.accentColor),
         ),
         actions: [
-          IconButton(onPressed: () {
-            
-          }, icon: Icon(Icons.book, color: ColorsApp.accentColor,)),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.book, color: ColorsApp.accentColor),
+          ),
         ],
       ),
 
-    floatingActionButton: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        FloatingActionButton(onPressed: () {  
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 2,
+            decoration: BoxDecoration(
+              color: ColorsApp.secondaryColor,
+              boxShadow: [BoxShadow(blurRadius: 2)],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 30,
+              itemBuilder: (context, index) {
+                return ItemTask(textValue: index.toString(),);
+              },
+            ),
+          ),
+        ],
+      ),
 
-        },
-        
-        backgroundColor: ColorsApp.primaryColor,
-        shape:CircleBorder(
-          side: BorderSide(
-            color: ColorsApp.primaryColor,
-            width: 2,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+
+            backgroundColor: ColorsApp.primaryColor,
+            shape: CircleBorder(
+              side: BorderSide(color: ColorsApp.primaryColor, width: 2),
+            ),
+            child: Icon(Icons.favorite, color: ColorsApp.accentColor),
           ),
-        ),
-        child: Icon(Icons.favorite,color: ColorsApp.accentColor,),
-        ),
-        SizedBox(height: 10,),
-        FloatingActionButton(onPressed: () {
-          
-        },
-        
-        backgroundColor: ColorsApp.primaryColor,
-        shape:CircleBorder(
-          side: BorderSide(
-            color: ColorsApp.primaryColor,
-            width: 2,
+          SizedBox(height: 10),
+          FloatingActionButton(
+            onPressed: () {},
+
+            backgroundColor: ColorsApp.primaryColor,
+            shape: CircleBorder(
+              side: BorderSide(color: ColorsApp.primaryColor, width: 2),
+            ),
+            child: Icon(Icons.add, color: ColorsApp.accentColor),
           ),
-        ),
-        child: Icon(Icons.add,color:ColorsApp.accentColor),
-        ),
-      ],
-      
-    ),
-    
+        ],
+      ),
     );
   }
 }
