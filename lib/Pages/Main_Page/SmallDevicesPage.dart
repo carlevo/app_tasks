@@ -1,4 +1,5 @@
 import 'package:app_tasks/colors_app.dart';
+import 'package:app_tasks/components/dialog_nova_tasca.dart';
 import 'package:app_tasks/components/item_task.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class Smalldevicespage extends StatelessWidget {
             child: ListView.builder(
               itemCount: 30,
               itemBuilder: (context, index) {
-                return ItemTask(textValue: index.toString(),);
+                return ItemTask(textValue: index.toString());
               },
             ),
           ),
@@ -48,6 +49,7 @@ class Smalldevicespage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            // Primer botón flotante
             onPressed: () {},
 
             backgroundColor: ColorsApp.primaryColor,
@@ -58,7 +60,10 @@ class Smalldevicespage extends StatelessWidget {
           ),
           SizedBox(height: 10),
           FloatingActionButton(
-            onPressed: () {},
+            //Botó afegir nova tasca
+            onPressed: () {
+              obreDialogNovaTasca(context);
+            },
 
             backgroundColor: ColorsApp.primaryColor,
             shape: CircleBorder(
@@ -68,6 +73,15 @@ class Smalldevicespage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void obreDialogNovaTasca(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogNovaTasca();
+      },
     );
   }
 }
