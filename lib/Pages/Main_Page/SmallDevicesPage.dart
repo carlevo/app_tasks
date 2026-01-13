@@ -28,7 +28,7 @@ class _SmalldevicespageState extends State<Smalldevicespage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.book, color: ColorsApp.accentColor),
+            icon: Icon(Icons.person, color: ColorsApp.accentColor),
           ),
         ],
       ),
@@ -66,16 +66,6 @@ class _SmalldevicespageState extends State<Smalldevicespage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            // Primer botón flotante
-            onPressed: () {},
-            backgroundColor: ColorsApp.primaryColor,
-            shape: CircleBorder(
-              side: BorderSide(color: ColorsApp.primaryColor, width: 2),
-            ),
-            child: Icon(Icons.favorite, color: ColorsApp.accentColor),
-          ),
-          SizedBox(height: 10),
-          FloatingActionButton(
             //Botó afegir nova tasca
             onPressed: () {
               obreDialogNovaTasca(context);
@@ -85,6 +75,16 @@ class _SmalldevicespageState extends State<Smalldevicespage> {
               side: BorderSide(color: ColorsApp.primaryColor, width: 2),
             ),
             child: Icon(Icons.add, color: ColorsApp.accentColor),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            // Primer botón flotante
+            onPressed: () {},
+            backgroundColor: ColorsApp.primaryColor,
+            shape: CircleBorder(
+              side: BorderSide(color: ColorsApp.primaryColor, width: 2),
+            ),
+            child: Icon(Icons.favorite, color: ColorsApp.accentColor),
           ),
         ],
       ),
