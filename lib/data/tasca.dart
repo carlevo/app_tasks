@@ -1,39 +1,32 @@
-/*Fem servir la BD Hive.
-Hive és una base de dades NoSQL,
-Per a cada tipus d' objecte que volem guardar a la BD,
-hem de crear una classe que hereti de HiveObject.
-Instal•lar les dependéncies de desenvolupament (dev_dependencies:
- hive_generator
- build runner
-
-Després d' haver creat aquesta classe, hem de generar
-eI fitxer . g. dart corresponent, que farà
-la serialització (conversió de l'objecte a dades
-que es poden guardar a la BD, i viceversa).
-
-Després, escriure part 'tasca.g.dart';
-i executar a la terminal:
-flutter pub run build_runner build
-(cal haver parat l'execució de l' app si està en marxa).
-Això ens generará l' arxiu tasca.g.dart automàticament .
-
- */
-
 import 'package:hive/hive.dart';
-part 'tasca.g.dart';
+import 'package:uuid/uuid.dart';
 
-//flutter pub run build_runner build
-//Genera un archivo que hara la conversion de este objeto nuestro
-//a bytes para guardar en la base de datos
+part 'tasca.g.dart'; // Si usas hive_generator, asegúrate de correr flutter packages pub run build_runner build
 
-@HiveType(typeId: 0) //Puede ir de 0 a 255.
-//HiveObject es la clase para guardar objetos de hiveobject
+@HiveType(typeId: 0)
 class Tasca extends HiveObject {
   @HiveField(0)
-  String title;
-
+  String id; // ID único para cada tarea
   @HiveField(1)
-  bool completed;
+  String title;
+  @HiveField(2)
+  bool isCompleted; // Para el estado del checkbox
 
-  Tasca({required this.title, this.completed = false});
+  Tasca({
+    String?
+    id, // Lo hacemos opcional para que se genere automáticamente si no se da
+    required this.title,
+    this.isCompleted = false, // Valor por defecto
+  }) : id =
+           id ??
+           const Uuid().v4(); // Genera un ID único si no se proporciona uno
+
+  // Método copyWith para crear una copia de la tarea con algunas propiedades modificadas
+  Tasca copyWith({String? id, String? title, bool? isCompleted}) {
+    return Tasca(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      isCompleted: isCompleted ?? this.isCompleted,
+    );
+  }
 }

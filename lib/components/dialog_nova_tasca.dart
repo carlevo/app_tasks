@@ -12,42 +12,37 @@ class DialogNovaTasca extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController controllerTextTasca = TextEditingController();
     return AlertDialog(
-      //Fondo del dialogo
       backgroundColor: ColorsApp.accentColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        //Añadimos el side
         side: BorderSide(color: ColorsApp.secondaryColor, width: 2),
       ),
-
       title: Text(
         "Quina nova tasca vols afegir?",
         style: TextStyle(color: ColorsApp.primaryColor),
       ),
       content: SizedBox(
-        //Añadimos el height y width para limitar el contenido
         height: 150,
         width: MediaQuery.of(context).size.width * 0.8,
         child: Column(
-          //Añadimos un evenly para que quede uniforme
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
             Textfieldpersonalitzat(controllertitle: controllerTextTasca),
-            SizedBox(height: 20),
+            const SizedBox(height: 20), // const
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 BotoDialog(
                   text: "Tancar",
                   colorBoto: ColorsApp.closeColor,
-                  iconBtn: Icon(Icons.close),
+                  iconBtn: const Icon(Icons.close), // const
                   accioBoto: () => tancarTasca(context),
                 ),
                 BotoDialog(
                   text: "Guardar",
                   colorBoto: ColorsApp.greenColor,
-                  iconBtn: Icon(Icons.save),
+                  iconBtn: const Icon(Icons.save), // const
                   accioBoto: () =>
                       guardarTasca(context, controllerTextTasca.text),
                 ),
@@ -60,6 +55,12 @@ class DialogNovaTasca extends StatelessWidget {
   }
 
   Future<void> guardarTasca(BuildContext context, String text) async {
+    if (text.trim().isEmpty) {
+      // Validar que el texto no esté vacío
+      // Puedes mostrar un SnackBar o un mensaje de error si quieres
+      print("El título de la tarea no puede estar vacío.");
+      return;
+    }
     RepositoriTasca repositoriTasca = RepositoriTasca();
     final navigator = Navigator.of(context);
     await repositoriTasca.afegirTasca(Tasca(title: text));
