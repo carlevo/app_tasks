@@ -16,7 +16,7 @@ class TascaAdapter extends TypeAdapter<Tasca> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Tasca(title: fields[0] as String, completed: fields[1] as bool);
+    return Tasca(title: fields[0] as String, isCompleted: fields[1] as bool);
   }
 
   @override
@@ -26,7 +26,7 @@ class TascaAdapter extends TypeAdapter<Tasca> {
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
-      ..write(obj.completed);
+      ..write(obj.isCompleted);
   }
 
   @override

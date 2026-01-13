@@ -1,27 +1,20 @@
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
-part 'tasca.g.dart'; // Si usas hive_generator, asegúrate de correr flutter packages pub run build_runner build
+part 'tasca.g.dart';
 
 @HiveType(typeId: 0)
 class Tasca extends HiveObject {
-  @HiveField(0)
-  String id; // ID único para cada tarea
-  @HiveField(1)
+  @HiveField(0) // Este debería ser el ID
+  String id;
+  @HiveField(1) // Este debería ser el título
   String title;
-  @HiveField(2)
-  bool isCompleted; // Para el estado del checkbox
+  @HiveField(2) // Este debería ser isCompleted
+  bool isCompleted; // <<-- Este es el nombre del campo
 
-  Tasca({
-    String?
-    id, // Lo hacemos opcional para que se genere automáticamente si no se da
-    required this.title,
-    this.isCompleted = false, // Valor por defecto
-  }) : id =
-           id ??
-           const Uuid().v4(); // Genera un ID único si no se proporciona uno
+  Tasca({String? id, required this.title, this.isCompleted = false})
+    : id = id ?? const Uuid().v4();
 
-  // Método copyWith para crear una copia de la tarea con algunas propiedades modificadas
   Tasca copyWith({String? id, String? title, bool? isCompleted}) {
     return Tasca(
       id: id ?? this.id,
