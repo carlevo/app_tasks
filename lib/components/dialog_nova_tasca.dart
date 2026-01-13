@@ -1,6 +1,8 @@
 import 'package:app_tasks/colors_app.dart';
 import 'package:app_tasks/components/boto_dialog.dart';
 import 'package:app_tasks/components/textfieldpersonalitzat.dart';
+import 'package:app_tasks/data/repositori_tasca.dart';
+import 'package:app_tasks/data/tasca.dart';
 import 'package:flutter/material.dart';
 
 class DialogNovaTasca extends StatelessWidget {
@@ -8,6 +10,7 @@ class DialogNovaTasca extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controllerTextTasca = TextEditingController();
     return AlertDialog(
       //Fondo del dialogo
       backgroundColor: ColorsApp.accentColor,
@@ -21,7 +24,7 @@ class DialogNovaTasca extends StatelessWidget {
         "Quina nova tasca vols afegir?",
         style: TextStyle(color: ColorsApp.primaryColor),
       ),
-      content: Container(
+      content: SizedBox(
         //Añadimos el height y width para limitar el contenido
         height: 150,
         width: MediaQuery.of(context).size.width * 0.8,
@@ -30,7 +33,7 @@ class DialogNovaTasca extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Textfieldpersonalitzat(),
+            Textfieldpersonalitzat(controllertitle: controllerTextTasca),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -45,7 +48,8 @@ class DialogNovaTasca extends StatelessWidget {
                   text: "Guardar",
                   colorBoto: ColorsApp.greenColor,
                   iconBtn: Icon(Icons.save),
-                  accioBoto: () => guardarTasca(context),
+                  accioBoto: () =>
+                      guardarTasca(context, controllerTextTasca.text),
                 ),
               ],
             ),
@@ -55,8 +59,11 @@ class DialogNovaTasca extends StatelessWidget {
     );
   }
 
-  void guardarTasca(BuildContext context) {
-    Navigator.of(context).pop();
+  Future<void> guardarTasca(BuildContext context, String text) async {
+    RepositoriTasca repositoriTasca = RepositoriTasca();
+    final navigator = Navigator.of(context);
+    await repositoriTasca.afegirTasca(Tasca(title: text));
+    navigator.pop();
   }
 
   void tancarTasca(BuildContext context) {

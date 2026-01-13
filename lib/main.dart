@@ -1,10 +1,21 @@
 import 'package:app_tasks/Pages/Main_Page/BigDevicesPage.dart';
 import 'package:app_tasks/Pages/Main_Page/MidDevicesPage.dart';
 import 'package:app_tasks/Pages/Main_Page/SmallDevicesPage.dart';
+import 'package:app_tasks/data/repositori_tasca.dart';
+import 'package:app_tasks/data/tasca.dart';
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Hive.initFlutter();
+
+  Hive.registerAdapter(TascaAdapter());
+
+  await Hive.openBox<List<Tasca>>(RepositoriTasca.nomBoxTasques);
+
   runApp(const MainApp());
 }
 
@@ -46,3 +57,9 @@ Widget tabletApp() {
 Widget desktopApp() {
   return Bigdevicespage();
 }
+
+/*Dependencias:
+================
+flutter pub add <nombre_dependencia>
+flutter_slidable, hive, hive_flutter
+*/
