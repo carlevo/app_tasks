@@ -1,38 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tasca.dart';
+part of 'contacte.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TascaAdapter extends TypeAdapter<Tasca> {
+class ContacteAdapter extends TypeAdapter<Contacte> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  Tasca read(BinaryReader reader) {
+  Contacte read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Tasca(
+    return Contacte(
+      nom: fields[1] as String,
+      email: fields[2] as String,
+      password: fields[3] as String,
       id: fields[0] as String?,
-      title: fields[1] as String,
-      isCompleted: fields[2] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Tasca obj) {
+  void write(BinaryWriter writer, Contacte obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.nom)
       ..writeByte(2)
-      ..write(obj.isCompleted);
+      ..write(obj.email)
+      ..writeByte(3)
+      ..write(obj.password);
   }
 
   @override
@@ -41,7 +44,7 @@ class TascaAdapter extends TypeAdapter<Tasca> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TascaAdapter &&
+      other is ContacteAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

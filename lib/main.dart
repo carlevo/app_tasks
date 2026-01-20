@@ -3,24 +3,41 @@ import 'package:app_tasks/Pages/Main_Page/MidDevicesPage.dart';
 import 'package:app_tasks/Pages/Main_Page/SmallDevicesPage.dart';
 import 'package:app_tasks/data/repositori_tasca.dart';
 import 'package:app_tasks/data/tasca.dart';
+// --- Añadidas importaciones para Contactes ---
+import 'package:app_tasks/data/contacte.dart'; // Importa el modelo Contacte
+import 'package:app_tasks/data/repositori_contacte.dart'; // Importa el repositorio de Contacte para el nombre de la caja
+// --- Fin de las importaciones para Contactes ---
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
+// flutter run -d chrome --web-port 33333
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); // Asegura que Flutter esté inicializado
 
-  Hive.initFlutter();
+  await Hive.initFlutter(); // Inicializa Hive para Flutter
 
+  // --- Registrar adaptadores ---
+  // El adaptador de Tasca ya estaba
   Hive.registerAdapter(TascaAdapter());
+  // --- AHORA REGISTRAMOS EL ADAPTADOR DE CONTACTE ---
+  Hive.registerAdapter(ContacteAdapter()); // ¡Esto es nuevo!
 
-  await Hive.openBox<List<Tasca>>(RepositoriTasca.nomBoxTasques);
+  // --- Abrir las cajas (boxes) ---
+  // Abrir caja de Tasca con tipo Tasca
+  await Hive.openBox<Tasca>(RepositoriTasca.nomBoxTasques);
+  // --- AHORA ABRIMOS LA CAJA DE CONTACTE ---
+  await Hive.openBox<Contacte>(
+    RepositoriContacte.nomBoxContactes,
+  ); // ¡Esto es nuevo!
 
   runApp(const MainApp());
 }
 
-double screenWidth = 0;
-String orientation = "";
+double screenWidth =
+    0; // Nota: Esta variable global no se usa actualmente en MainApp
+String orientation =
+    ""; // Nota: Esta variable global no se usa actualmente en MainApp
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -28,7 +45,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final bool dispositiuWeb = kIsWeb;
-    Size screenWidth = MediaQuery.of(context).size;
+    Size screenWidth = MediaQuery.of(
+      context,
+    ).size; // Variable local que oculta la global
 
     //print(MediaQuery.of(context).size.height);
     //print(MediaQuery.of(context).size.width);
