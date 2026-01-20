@@ -70,7 +70,7 @@ Widget mobileApp() {
 }
 
 Widget tabletApp() {
-  return Middevicespage();
+  return MidDevicesPage();
 }
 
 Widget desktopApp() {
