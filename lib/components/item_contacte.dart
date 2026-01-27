@@ -6,8 +6,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class ItemContacte extends StatefulWidget {
   final Contacte
   contacte; // Ahora ItemContacte recibe el objeto Contacte completo
-  final VoidCallback? onEdit; // Callback para editar
-  final VoidCallback? onDelete; // Callback para eliminar
+  //Se inicializa y no recibe ni pasa ningun valor
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   const ItemContacte({
     super.key,
